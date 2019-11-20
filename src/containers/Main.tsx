@@ -10,17 +10,21 @@ const Main = memo(() => {
     <React.Fragment>
       <div>
         <Switch>
-          <Route exact path='/' component={Search}></Route>
-          <Route exact path='/favourites' component={Favourites}></Route>
+          <Route exact path='/'> 
+            <Search></Search> 
+          </Route>
+          <Route exact path='/favourites'>
+            <Favourites></Favourites>
+          </Route>
         </Switch>
       </div>
-      <div>
-      <Link to="/">
-        <button>Search</button>
-      </Link>
-      <Link to="/favourites">
-        <button>Favourites</button>
-      </Link>
+      <div className="bottom-nav">
+        <Link to="/">
+          <button>Search</button>
+        </Link>
+        <Link to="/favourites">
+          <button>Favourites</button>
+        </Link>
       </div>
     </React.Fragment>
   );

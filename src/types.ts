@@ -1,18 +1,18 @@
-export interface Image {
+export interface IImage {
     id: string;
     urls: any;
     isSaved: boolean;
 }
 
-export interface SearchQuery {
+export interface ISearchQuery {
     page: number;
-    results: Image[];
+    results: IImage[];
     searchTerm: string;
     isLoading: boolean;
     error: any;
 }
 
-export interface AppState {
-    searchQuery: SearchQuery;
-    savedImages: Image[];
+export interface IAppState {
+    searchQuery: ISearchQuery;
+    savedImages: IImage[];
 }

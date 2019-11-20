@@ -12,6 +12,15 @@ code {
     monospace;
 }
 .dog {
-  height:500px;
+  height:300px;
   width:300px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: white;
+  z-index: 99;
 }

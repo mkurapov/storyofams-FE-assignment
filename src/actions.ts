@@ -1,5 +1,6 @@
 // action.js
 import api from './api';
+import { ISearchQuery } from './types';
 
 export const FETCH_IMAGES_PENDING = 'FETCH_IMAGES_PENDING';
 export const FETCH_IMAGES_SUCCESS = 'FETCH_IMAGES_SUCCESS';
@@ -33,15 +34,14 @@ export function saveImage(image:any) {
     }
 }
 
-export const fetchImages = (query:string) => {
+export const fetchImages = (query:ISearchQuery) => {
     return (dispatch:any) => {
         dispatch(fetchImagesPending());
         console.log(query);
-        return api.get('/search/photos?page=1&query=office')
+        return api.get(`/search/photos?page=1&query=${query.searchTerm}&page=${query.page}`)
         .then(res => {
             const images = res.data.results;
             dispatch(fetchImagesSuccess(images));
-            console.log(images);
             return res;
         })
         .catch(error => {

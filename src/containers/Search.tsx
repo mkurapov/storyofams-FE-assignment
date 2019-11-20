@@ -1,22 +1,29 @@
-import React,  {memo}  from 'react';
+import React,  {memo, useEffect}  from 'react';
 import { connect } from 'react-redux'
 import { fetchImages, saveImage } from '../actions';
 import { withRouter } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Image, AppState } from '../types';
-
+import { IAppState, IImage, ISearchQuery } from '../types';
+import Image from '../components/Image';
 
 
 const Search = memo((props:any) => {
+    useEffect(() => {
+      // console.log(props.searchQuery);
+    }, [])
+
     function doShit() {
-      console.log(props);
-      props.searchImages('yes');
+      props.searchImages({
+        ...props.searchQuery,
+        page: props.searchQuery.page + 1,
+        searchTerm: 'mountains'
+      });
     }
 
     function renderResults() {
       console.log('rendering');
-      return props.images.map((image:Image) => 
-          <img className="dog" onClick={ () => props.saveImage(image) } src={image.urls.regular} key={image.id}/>
+      return props.searchQuery.results.map((image:IImage) => 
+          <Image image={image} ></Image>
         )
     }
     return (
@@ -25,9 +32,9 @@ const Search = memo((props:any) => {
           Search
         </div>
         <InfiniteScroll
-          dataLength={props.images.length} //This is important field to render the next data
+          dataLength={props.searchQuery.length} //This is important field to render the next data
           next={() => doShit()}
-          hasMore={true}
+          hasMore={false}
           loader={<h4>Loading...</h4>}>
             { renderResults() }
       </InfiniteScroll>
@@ -36,13 +43,13 @@ const Search = memo((props:any) => {
     );
 });
 
-const mapStateToProps = (state:AppState) => ({
-  images: state.searchQuery.results || []
+const mapStateToProps = (state:IAppState) => ({
+  searchQuery: state.searchQuery || []
 });
 
 const mapDispatchToProps = (dispatch:any) => ({
-  searchImages: (query:string) => dispatch(fetchImages(query)),
-  saveImage: (image:Image) => dispatch(saveImage(image))
+  searchImages: (query:ISearchQuery) => dispatch(fetchImages(query)),
+  saveImage: (image:any) => dispatch(saveImage(image))
 }); 
 
 export default withRouter(connect(
