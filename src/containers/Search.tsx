@@ -1,25 +1,34 @@
-import React,  {memo, useEffect}  from 'react';
+import React,  {memo, useEffect, useState}  from 'react';
 import { connect } from 'react-redux'
 import { fetchImages, saveImage } from '../actions';
 import { withRouter } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { IAppState, IImage, ISearchQuery } from '../types';
 import Image from '../components/Image';
+import useDebounce from '../hooks/debounce';
 
 
 const Search = memo((props:any) => {
-    useEffect(() => {
-      // console.log(props.searchQuery);
-    }, [])
+    const [ searchTerm, setSearchTerm ] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500); 
 
-    function doShit() {
+    useEffect( () => {
+      if (debouncedSearchTerm && debouncedSearchTerm.trim()) {
+        getMessages(true);
+      }
+    },
+    [debouncedSearchTerm]
+  );
+  
+    function getMessages(isNewSearch = false) {
       props.searchImages({
         ...props.searchQuery,
-        page: props.searchQuery.page + 1,
-        searchTerm: 'mountains'
+        page: isNewSearch ? 1 : props.searchQuery.page + 1,
+        searchTerm: searchTerm
       });
     }
 
+  
     function renderResults() {
       console.log('rendering');
       return props.searchQuery.results.map((image:IImage) => 
@@ -28,12 +37,10 @@ const Search = memo((props:any) => {
     }
     return (
       <React.Fragment>
-        <div onClick={()=> doShit()}>
-          Search
-        </div>
+        <input className="chat__form__input" placeholder="Type your message..." type="text" value={ searchTerm } onChange={ev => setSearchTerm(ev.target.value)} />
         <InfiniteScroll
           dataLength={props.searchQuery.length} //This is important field to render the next data
-          next={() => doShit()}
+          next={() => getMessages(false)}
           hasMore={false}
           loader={<h4>Loading...</h4>}>
             { renderResults() }

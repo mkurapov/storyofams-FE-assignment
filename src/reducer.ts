@@ -24,15 +24,9 @@ export default function imagesReducer(state = initialState, action:any) : IAppSt
                 }
             }
         case FETCH_IMAGES_SUCCESS:
-            console.log('FIS, ', state.searchQuery.page);
-            const resolvedQuery = {
-                ...state.searchQuery,
-                results: [...state.searchQuery.results, ...action.images],
-                page: state.searchQuery.page += 1
-            }
             return {
                 ...state,
-                searchQuery: resolvedQuery
+                searchQuery: action.query
             }
         case FETCH_IMAGES_ERROR:
             return {
@@ -42,7 +36,7 @@ export default function imagesReducer(state = initialState, action:any) : IAppSt
                     error: action.error
                 },
             }
-        case SAVE_IMAGE:
+        case SAVE_IMAGE:    
             return {
                 ...state,
                 savedImages: [...state.savedImages, action.image]

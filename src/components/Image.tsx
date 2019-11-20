@@ -14,8 +14,10 @@ const Image:React.FC<ImageProps> = (props) => {
       console.log(props.image);
     }, [])
 
+
+
     return (
-        <img className="dog" onClick={ () => console.log('') } src={props.image.urls.regular} key={props.image.id}/>
+        <img className="dog" onClick={ () => saveImage(props.image) } src={props.image.urls.regular} key={props.image.id}/>
     );
 };
 

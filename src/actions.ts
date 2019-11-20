@@ -1,4 +1,3 @@
-// action.js
 import api from './api';
 import { ISearchQuery } from './types';
 
@@ -13,10 +12,10 @@ function fetchImagesPending() {
     }
 }
 
-function fetchImagesSuccess(images:any) {
+function fetchImagesSuccess(query:ISearchQuery) {
     return {
         type: FETCH_IMAGES_SUCCESS,
-        images: images
+        query: query
     }
 }
 
@@ -30,7 +29,7 @@ function fetchImagesError(error:any) {
 export function saveImage(image:any) {
     return {
         type: SAVE_IMAGE,
-        image:image
+        image: image
     }
 }
 
@@ -38,10 +37,14 @@ export const fetchImages = (query:ISearchQuery) => {
     return (dispatch:any) => {
         dispatch(fetchImagesPending());
         console.log(query);
-        return api.get(`/search/photos?page=1&query=${query.searchTerm}&page=${query.page}`)
+        return api.get(`/search/photos?query=${query.searchTerm}&page=${query.page}`)
         .then(res => {
-            const images = res.data.results;
-            dispatch(fetchImagesSuccess(images));
+            const isNewSearch = query.page == 1;
+            const queryResult = {
+                ...query,
+                results: isNewSearch ? res.data.results : [...query.results, ...res.data.results]
+            }
+            dispatch(fetchImagesSuccess(queryResult));
             return res;
         })
         .catch(error => {
