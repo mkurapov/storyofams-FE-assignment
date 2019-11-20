@@ -1,6 +1,6 @@
 import { IAppState, IImage, ISearchQuery } from './types';
 
-import {FETCH_IMAGES_PENDING, FETCH_IMAGES_SUCCESS, FETCH_IMAGES_ERROR, SAVE_IMAGE, saveImage } from './actions';
+import {FETCH_IMAGES_PENDING, FETCH_IMAGES_SUCCESS, FETCH_IMAGES_ERROR, TOGGLE_SAVED_IMAGE } from './actions';
 
 const initialState:IAppState = {
     savedImages: [],
@@ -36,10 +36,13 @@ export default function imagesReducer(state = initialState, action:any) : IAppSt
                     error: action.error
                 },
             }
-        case SAVE_IMAGE:    
+        case TOGGLE_SAVED_IMAGE:
+            console.log(state.savedImages);
+            const isImageSaved = state.savedImages.some(img => img.id === action.image.id);
             return {
                 ...state,
-                savedImages: [...state.savedImages, action.image]
+                savedImages: isImageSaved ? 
+                    state.savedImages.filter(img => img.id !== action.image.id) : [...state.savedImages, action.image]
             }
         default: 
             return state;

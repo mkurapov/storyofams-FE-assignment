@@ -1,10 +1,10 @@
 import api from './api';
-import { ISearchQuery } from './types';
+import { ISearchQuery, IImage } from './types';
 
 export const FETCH_IMAGES_PENDING = 'FETCH_IMAGES_PENDING';
 export const FETCH_IMAGES_SUCCESS = 'FETCH_IMAGES_SUCCESS';
 export const FETCH_IMAGES_ERROR = 'FETCH_IMAGES_ERROR';
-export const SAVE_IMAGE = 'SAVE_IMAGE';
+export const TOGGLE_SAVED_IMAGE = 'TOGGLE_SAVED_IMAGE';
 
 function fetchImagesPending() {
     return {
@@ -26,11 +26,15 @@ function fetchImagesError(error:any) {
     }
 }
 
-export function saveImage(image:any) {
+function toggleImageAsFavourite(image:IImage) {
     return {
-        type: SAVE_IMAGE,
+        type: TOGGLE_SAVED_IMAGE,
         image: image
     }
+}
+
+export const toggleSavedImage = (image:IImage) => {
+    return (dispatch:any) => dispatch(toggleImageAsFavourite(image));
 }
 
 export const fetchImages = (query:ISearchQuery) => {

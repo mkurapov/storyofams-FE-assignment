@@ -1,16 +1,20 @@
 import React,  {memo, useEffect, useState}  from 'react';
 import { connect } from 'react-redux'
-import { fetchImages, saveImage } from '../actions';
+import { fetchImages, toggleSavedImage } from '../actions';
 import { withRouter } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { IAppState, IImage, ISearchQuery } from '../types';
 import Image from '../components/Image';
 import useDebounce from '../hooks/debounce';
 
-
 const Search = memo((props:any) => {
     const [ searchTerm, setSearchTerm ] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500); 
+
+    // this acts as componentDidMount
+    useEffect( () => {
+      setSearchTerm(props.searchQuery.searchTerm);
+    }, []);
 
     useEffect( () => {
       if (debouncedSearchTerm && debouncedSearchTerm.trim()) {
@@ -28,35 +32,55 @@ const Search = memo((props:any) => {
       });
     }
 
-  
     function renderResults() {
       console.log('rendering');
-      return props.searchQuery.results.map((image:IImage) => 
-          <Image image={image} ></Image>
-        )
+      const isInSavedImages = (image:IImage) => props.savedImages.some((img:IImage) => img.id === image.id) as boolean;
+        return props.searchQuery.results.map((image:IImage) => 
+          <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-3">
+            <Image 
+              image={image} 
+              isSaved={isInSavedImages(image)}  
+              toggleSavedImage={() => props.toggleSavedImage(image)}
+            ></Image>
+          </div>
+          );
     }
     return (
       <React.Fragment>
-        <input className="chat__form__input" placeholder="Type your message..." type="text" value={ searchTerm } onChange={ev => setSearchTerm(ev.target.value)} />
-        <InfiniteScroll
-          dataLength={props.searchQuery.length} //This is important field to render the next data
-          next={() => getMessages(false)}
-          hasMore={false}
-          loader={<h4>Loading...</h4>}>
-            { renderResults() }
-      </InfiniteScroll>
+        <div className="search-bar">
+          <input className="search-bar__input" placeholder="Search pictures..." type="text" value={ searchTerm } onChange={ev => setSearchTerm(ev.target.value)} />
+        </div>
+        <div className="search-results">
+          {  props.searchQuery.results.length > 0 ? 
+
+          (<InfiniteScroll
+            dataLength={props.searchQuery.results.length} //This is important field to render the next data
+            next={() => getMessages(false)}
+            hasMore={true}
+            loader={<span></span>}>
+              <div className="row">
+              { renderResults() }
+              </div>
+          </InfiniteScroll>)
+
+          :
+
+          <div>Sorry, no results for that search.</div>
+          }
+        </div>
         
       </React.Fragment>
     );
 });
 
 const mapStateToProps = (state:IAppState) => ({
-  searchQuery: state.searchQuery || []
+  searchQuery: state.searchQuery || [],
+  savedImages: state.savedImages || []
 });
 
 const mapDispatchToProps = (dispatch:any) => ({
   searchImages: (query:ISearchQuery) => dispatch(fetchImages(query)),
-  saveImage: (image:any) => dispatch(saveImage(image))
+  toggleSavedImage: (image:IImage) => dispatch(toggleSavedImage(image))
 }); 
 
 export default withRouter(connect(

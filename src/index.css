@@ -1,3 +1,8 @@
+:root {
+  --color-blue: #1B3CEA;
+  --color-grey: #1F2933;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,16 +16,109 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.dog {
-  height:300px;
-  width:300px;
+
+.link {
+  text-decoration: none;
+  color: var(--color-grey);
+}
+
+.link:visted {
+  color: inherit;
+}
+
+.link--selected {
+  font-weight: bold;
+  color: var(--color-blue);
+}
+
+.image-wrap {
+  height: 40vh;
+  border-radius: 8px;
+  position: relative;
+}
+
+.image {
+  border-radius: 8px;
+  height:100%;
+  width: 100%;
+  object-fit: cover;
+  display: inline-block;
+}
+
+.image__save-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  height: 40px;width:40px;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.image__save-btn__heart {
+  height: auto;
+  margin-bottom: -8px;
+  width: 100%;
+  stroke: black; 
+  stroke-width: 2;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image__save-btn__heart--saved {
+  fill: black;
+}
+
+@keyframes addedToFaves {
+
+}
+
+.image__save-btn__heart:hover{
+  transform: scale(1.1);
 }
 
 .bottom-nav {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 60px;
-  background: white;
+  padding: 10px 0;
+  background:rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
   z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-bar {
+  position: fixed;
+  width:100%;
+  top:0;
+  background: white;
+  padding: 1rem 1rem;
+  z-index: 99;
+}
+
+.search-results {
+  padding: 100px 1rem 0 1rem;
+  display: flex;
+}
+
+.search-bar__input {
+  background: #E2E6EB;
+  border-radius: 40px;
+  padding: 16px 12px;
+  width: 100%;
+  -webkit-appearance: none;
+  border:none;
+  font-weight: bold;
+  font-size: 14px;
+  /* font-family: var(--font-primary); */
+}
+
+.search-bar__input:focus {
+  outline: none;
 }
