@@ -1,11 +1,12 @@
 import React,  {memo, useEffect, useState}  from 'react';
 import { connect } from 'react-redux'
-import { fetchImages, toggleSavedImage } from '../actions';
+import { fetchImages, toggleSavedImage } from '../../actions';
 import { withRouter } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { IAppState, IImage, ISearchQuery } from '../types';
-import Image from '../components/Image';
-import useDebounce from '../hooks/debounce';
+import { IAppState, IImage, ISearchQuery } from '../../types';
+import Image from '../../components/Image/Image';
+import useDebounce from '../../hooks/debounce';
+import './Search.css';
 
 const Search = memo((props:any) => {
     const [ searchTerm, setSearchTerm ] = useState('');
@@ -16,6 +17,7 @@ const Search = memo((props:any) => {
       setSearchTerm(props.searchQuery.searchTerm);
     }, []);
 
+    // this uses the debounce hook, rerendering the component if it changes
     useEffect( () => {
       if (debouncedSearchTerm && debouncedSearchTerm.trim()) {
         getMessages(true);
@@ -55,7 +57,7 @@ const Search = memo((props:any) => {
             {  props.searchQuery.results.length > 0 ? 
           (
             <InfiniteScroll
-              dataLength={props.searchQuery.results.length} //This is important field to render the next data
+              dataLength={props.searchQuery.results.length}
               next={() => getMessages(false)}
               hasMore={true}
               loader={<span></span>}>

@@ -1,0 +1,47 @@
+.image-wrap {
+    height: 40vh;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .image {
+    border-radius: 8px;
+    height:100%;
+    width: 100%;
+    object-fit: cover;
+    display: inline-block;
+  }
+  
+  .image__save-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    height: 40px;width:40px;
+    padding: 10px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .image__save-btn:hover{
+    transform: scale(1.1);
+  }
+  
+  .image__save-btn__heart {
+    height: auto;
+    margin-bottom: -8px;
+    width: 100%;
+    stroke: var(--color-blue);
+    stroke-width: 2;
+    transition: fill 0.3s ease-in-out;
+  }
+  
+  .image__save-btn__heart--saved {
+    fill: var(--color-blue);
+  }
+  
+  

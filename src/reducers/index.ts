@@ -1,6 +1,6 @@
-import { IAppState, IImage, ISearchQuery } from './types';
+import { IAppState, IImage, ISearchQuery } from '../types';
 
-import {FETCH_IMAGES_PENDING, FETCH_IMAGES_SUCCESS, FETCH_IMAGES_ERROR, TOGGLE_SAVED_IMAGE } from './actions';
+import {FETCH_IMAGES_PENDING, FETCH_IMAGES_SUCCESS, FETCH_IMAGES_ERROR, TOGGLE_SAVED_IMAGE } from '../actions';
 
 const initialState:IAppState = {
     savedImages: [],

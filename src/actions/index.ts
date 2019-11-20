@@ -1,5 +1,5 @@
-import api from './api';
-import { ISearchQuery, IImage } from './types';
+import api from '../api';
+import { ISearchQuery, IImage } from '../types';
 
 export const FETCH_IMAGES_PENDING = 'FETCH_IMAGES_PENDING';
 export const FETCH_IMAGES_SUCCESS = 'FETCH_IMAGES_SUCCESS';

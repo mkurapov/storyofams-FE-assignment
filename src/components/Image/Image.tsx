@@ -1,7 +1,6 @@
-import React,  {memo, useEffect, useState}  from 'react';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
-import { IAppState, IImage   } from '../types';
+import React,  { useState}  from 'react';
+import {  IImage   } from '../../types';
+import './Image.css';
 
 const Image = (props: { image: IImage, isSaved:boolean, toggleSavedImage: any }) => {
     const [ isSaved, setIsSaved ] = useState(props.isSaved);

@@ -1,0 +1,23 @@
+.search-bar {
+  position: fixed;
+  width:100%;
+  top:0;
+  background: white;
+  padding: 1rem 1rem;
+  z-index: 99;
+}
+
+.search-bar__input {
+  background: #E2E6EB;
+  border-radius: 40px;
+  padding: 16px 12px;
+  width: 100%;
+  -webkit-appearance: none;
+  border:none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.search-bar__input:focus {
+  outline: none;
+}

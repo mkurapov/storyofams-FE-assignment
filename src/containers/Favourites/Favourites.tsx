@@ -1,15 +1,17 @@
 import React from 'react';
-import { IAppState, IImage } from '../types';
-import Image from '../components/Image';
+import { IAppState, IImage } from '../../types';
+import Image from '../../components/Image/Image';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { toggleSavedImage } from '../actions';
+import { toggleSavedImage } from '../../actions';
 
 const Favourites = (props:any) => {
   return (
     <div className="content">
       <h1 className="text-left">Favourites</h1>
-      <div className="row">
+      {
+        props.savedImages.length > 0 ? 
+        (<div className="row">
       { props.savedImages.map((image:IImage) => 
         <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-3">
           <Image 
@@ -19,7 +21,10 @@ const Favourites = (props:any) => {
             ></Image>
         </div>
         ) }
-      </div>
+      </div>)
+      :
+      <h3>Nothing here yet. Start liking some photos!</h3>
+      }
     </div>
   );
 }
