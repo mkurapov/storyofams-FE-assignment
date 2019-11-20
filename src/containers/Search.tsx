@@ -50,23 +50,22 @@ const Search = memo((props:any) => {
         <div className="search-bar">
           <input className="search-bar__input" placeholder="Search pictures..." type="text" value={ searchTerm } onChange={ev => setSearchTerm(ev.target.value)} />
         </div>
-        <div className="search-results">
-          {  props.searchQuery.results.length > 0 ? 
-
-          (<InfiniteScroll
-            dataLength={props.searchQuery.results.length} //This is important field to render the next data
-            next={() => getMessages(false)}
-            hasMore={true}
-            loader={<span></span>}>
-              <div className="row">
-              { renderResults() }
-              </div>
-          </InfiniteScroll>)
-
-          :
-
-          <div>Sorry, no results for that search.</div>
-          }
+        <div className="content pt-5 mt-3">
+          <h1 className="text-left">{ props.searchQuery.searchTerm ? props.searchQuery.searchTerm : '' }</h1>
+            {  props.searchQuery.results.length > 0 ? 
+          (
+            <InfiniteScroll
+              dataLength={props.searchQuery.results.length} //This is important field to render the next data
+              next={() => getMessages(false)}
+              hasMore={true}
+              loader={<span></span>}>
+                <div className="row">
+                { renderResults() }
+                </div>
+            </InfiniteScroll>)
+            :
+            <h3> {props.searchQuery.searchTerm ? `Sorry, no results found for: ${props.searchQuery.searchTerm}` : 'Start your search, just a little higher.'}</h3>
+            }
         </div>
         
       </React.Fragment>

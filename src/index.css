@@ -17,6 +17,14 @@ code {
     monospace;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.content {
+  padding: 0 1rem;
+}
+
 .link {
   text-decoration: none;
   color: var(--color-grey);
@@ -103,7 +111,6 @@ code {
 }
 
 .search-results {
-  padding: 100px 1rem 0 1rem;
   display: flex;
 }
 

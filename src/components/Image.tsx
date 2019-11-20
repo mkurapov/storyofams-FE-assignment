@@ -7,7 +7,6 @@ const Image = (props: { image: IImage, isSaved:boolean, toggleSavedImage: any })
     const [ isSaved, setIsSaved ] = useState(props.isSaved);
 
     function onSaveClick() {
-        console.log('saving')
         setIsSaved(!isSaved)
         props.toggleSavedImage(props.image);
     }

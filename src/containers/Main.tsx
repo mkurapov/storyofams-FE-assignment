@@ -4,11 +4,10 @@ import { Switch, Route, Link, NavLink, Redirect } from 'react-router-dom';
 import Search from './Search';
 import Favourites from './Favourites';
 
-
+// It would be better to pull out the routes into an object, then loop over them
 const Main = memo(() => {
   return (
     <React.Fragment>
-      <div>
         <Switch>
           <Route exact path='/'> 
             <Search></Search> 
@@ -17,7 +16,6 @@ const Main = memo(() => {
             <Favourites></Favourites>
           </Route>
         </Switch>
-      </div>
       <div className="bottom-nav">
           <NavLink to="/" exact className="link col-6" activeClassName="link--selected">
               <div>

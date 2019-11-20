@@ -7,11 +7,11 @@ import { toggleSavedImage } from '../actions';
 
 const Favourites = (props:any) => {
   return (
-    <React.Fragment>
-      <div className="h1">Favourites</div>
-      <div className="search-results">
+    <div className="content">
+      <h1 className="text-left">Favourites</h1>
+      <div className="row">
       { props.savedImages.map((image:IImage) => 
-        <div key={image.id} className="col-md-6 col-lg-4 mb-3">
+        <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-3">
           <Image 
             image={image} 
             isSaved={true}  
@@ -20,7 +20,7 @@ const Favourites = (props:any) => {
         </div>
         ) }
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 
