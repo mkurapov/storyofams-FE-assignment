@@ -10,7 +10,8 @@
 .search-bar__input {
   background: #E2E6EB;
   border-radius: 40px;
-  padding: 16px 12px;
+  max-width: 900px;
+  padding: 16px;
   width: 100%;
   -webkit-appearance: none;
   border:none;

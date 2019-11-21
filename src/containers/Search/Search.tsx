@@ -40,11 +40,10 @@ const Search = (props:any) => {
        if (isNewSearch) {
         window.scrollTo(0,0);
       }
-      
+
     }
 
     function renderResults() {
-      console.log('rendering');
       const isInSavedImages = (image:IImage) => props.savedImages.some((img:IImage) => img.id === image.id) as boolean;
         return props.searchQuery.results.map((image:IImage) => 
           <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-4">

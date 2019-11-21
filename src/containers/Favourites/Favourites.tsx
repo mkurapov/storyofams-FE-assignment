@@ -7,7 +7,7 @@ import { toggleSavedImage } from '../../actions';
 
 const Favourites = (props:any) => {
   return (
-    <div className="content">
+    <div className="content pb-5 mb-2">
       <h1 className="text-left">Favourites</h1>
       {
         props.savedImages.length > 0 ? 

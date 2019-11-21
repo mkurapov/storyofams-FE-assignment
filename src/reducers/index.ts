@@ -37,7 +37,6 @@ export default function imagesReducer(state = initialState, action:any) : IAppSt
                 },
             }
         case TOGGLE_SAVED_IMAGE:
-            console.log(state.savedImages);
             const isImageSaved = state.savedImages.some(img => img.id === action.image.id);
             return {
                 ...state,
