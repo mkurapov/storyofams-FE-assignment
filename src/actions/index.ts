@@ -6,6 +6,7 @@ export const FETCH_IMAGES_SUCCESS = 'FETCH_IMAGES_SUCCESS';
 export const FETCH_IMAGES_ERROR = 'FETCH_IMAGES_ERROR';
 export const TOGGLE_SAVED_IMAGE = 'TOGGLE_SAVED_IMAGE';
 
+// TODO: Implement pending & error
 function fetchImagesPending() {
     return {
         type: FETCH_IMAGES_PENDING
@@ -40,7 +41,6 @@ export const toggleSavedImage = (image:IImage) => {
 export const fetchImages = (query:ISearchQuery) => {
     return (dispatch:any) => {
         dispatch(fetchImagesPending());
-        console.log(query);
         return api.get(`/search/photos?query=${query.searchTerm}&page=${query.page}`)
         .then(res => {
             const isNewSearch = query.page == 1;

@@ -8,7 +8,10 @@ import Image from '../../components/Image/Image';
 import useDebounce from '../../hooks/debounce';
 import './Search.css';
 
-const Search = memo((props:any) => {
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect, Link } from 'react-router-dom';
+import ImageViewer from '../ImageViewer/ImageViewer';
+
+const Search = (props:any) => {
     const [ searchTerm, setSearchTerm ] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500); 
 
@@ -32,18 +35,26 @@ const Search = memo((props:any) => {
         page: isNewSearch ? 1 : props.searchQuery.page + 1,
         searchTerm: searchTerm
       });
+
+       // jump to top of page 
+       if (isNewSearch) {
+        window.scrollTo(0,0);
+      }
+      
     }
 
     function renderResults() {
       console.log('rendering');
       const isInSavedImages = (image:IImage) => props.savedImages.some((img:IImage) => img.id === image.id) as boolean;
         return props.searchQuery.results.map((image:IImage) => 
-          <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-3">
-            <Image 
-              image={image} 
-              isSaved={isInSavedImages(image)}  
-              toggleSavedImage={() => props.toggleSavedImage(image)}
-            ></Image>
+          <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-4">
+              <Link to={`/photo/${image.id}`}>
+                <Image 
+                  image={image} 
+                  isSaved={isInSavedImages(image)}  
+                  toggleSavedImage={() => props.toggleSavedImage(image)}
+                ></Image>
+              </Link>
           </div>
           );
     }
@@ -72,7 +83,7 @@ const Search = memo((props:any) => {
         
       </React.Fragment>
     );
-});
+};
 
 const mapStateToProps = (state:IAppState) => ({
   searchQuery: state.searchQuery || [],
@@ -84,8 +95,8 @@ const mapDispatchToProps = (dispatch:any) => ({
   toggleSavedImage: (image:IImage) => dispatch(toggleSavedImage(image))
 }); 
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Search));
+)(Search);
 

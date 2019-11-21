@@ -1,5 +1,5 @@
 .image-wrap {
-    height: 40vh;
+    height: 45vh;
     border-radius: 8px;
     position: relative;
   }
@@ -14,10 +14,9 @@
   
   .image__save-btn {
     position: absolute;
-    bottom: 20px;
-    right: 30px;
+    bottom: 1rem;
+    right: 1rem;
     height: 40px;width:40px;
-    padding: 10px;
     background: white;
     border-radius: 50%;
     display: flex;
@@ -26,20 +25,22 @@
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
   }
-  
-  .image__save-btn:hover{
-    transform: scale(1.1);
-  }
+
   
   .image__save-btn__heart {
-    height: auto;
-    margin-bottom: -8px;
+    height: 24px;
     width: 100%;
+    margin-bottom: -8px;
     stroke: var(--color-blue);
     stroke-width: 2;
-    transition: fill 0.3s ease-in-out;
+    transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
-  
+    
+  /* doing both so not jaggedy anim */
+  .image__save-btn:hover {
+    transform: scale(1.1);
+  }
+
   .image__save-btn__heart--saved {
     fill: var(--color-blue);
   }

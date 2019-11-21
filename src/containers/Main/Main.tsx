@@ -1,14 +1,20 @@
 import React,  {memo} from 'react';
-import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
+import { Switch, Route, NavLink, Redirect, withRouter } from 'react-router-dom';
 import Search from '../Search/Search';
 import Favourites from '../Favourites/Favourites';
 import './Main.css'
+import ImageViewer from '../ImageViewer/ImageViewer';
 
-// It would be better to pull out the routes into an object, then loop over them
-const Main = memo(() => {
+// TODO: pull out routes into an object, then loop over them
+const Main = () => {
   return (
     <React.Fragment>
         <Switch>
+        <Route path="/photo/:id" render={({match}) => (
+            <ImageViewer
+              id={match.params.id}
+            />
+          )}/>
           <Route exact path='/'> 
             <Search></Search> 
           </Route>
@@ -33,6 +39,6 @@ const Main = memo(() => {
       </div>
     </React.Fragment>
   );
-})
+};
 
-export default Main;
+export default withRouter(Main);

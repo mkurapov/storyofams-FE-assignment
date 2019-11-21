@@ -1,7 +1,6 @@
 export interface IImage {
     id: string;
     urls: any;
-    isSaved: boolean;
 }
 
 export interface ISearchQuery {

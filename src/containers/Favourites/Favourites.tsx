@@ -2,7 +2,7 @@ import React from 'react';
 import { IAppState, IImage } from '../../types';
 import Image from '../../components/Image/Image';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { toggleSavedImage } from '../../actions';
 
 const Favourites = (props:any) => {
@@ -14,11 +14,13 @@ const Favourites = (props:any) => {
         (<div className="row">
       { props.savedImages.map((image:IImage) => 
         <div key={image.id} className="col-12 col-md-6 col-lg-3 mb-3">
-          <Image 
-            image={image} 
-            isSaved={true}  
-            toggleSavedImage={() => props.toggleSavedImage(image)}
-            ></Image>
+          <Link to={`/photo/${image.id}`}>
+            <Image 
+              image={image} 
+              isSaved={true}  
+              toggleSavedImage={() => props.toggleSavedImage(image)}
+              ></Image>
+          </Link>
         </div>
         ) }
       </div>)
