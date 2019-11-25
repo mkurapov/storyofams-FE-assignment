@@ -1,4 +1,6 @@
-## Implementing Unsplash search app with Redux
+https://storyofams-test.netlify.com/
+
+## Implementing Unsplash search app with React & Redux
 
 ### Considerations & Questions
 - When using Redux, where is best to put the FE business logic? Think about making a middle layer, or expanding the action method, or a thick reducer. The example: `fetchImages()` action contains most of the logic, but `TOGGLE_SAVED_IMAGE` case in the reducer contains the logic because it needs the state object
