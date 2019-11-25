@@ -5,14 +5,14 @@ https://storyofams-test.netlify.com/
 ### Considerations & Questions
 - When using Redux, where is best to put the FE business logic? Think about making a middle layer, or expanding the action method, or a thick reducer. The example: `fetchImages()` action contains most of the logic, but `TOGGLE_SAVED_IMAGE` case in the reducer contains the logic because it needs the state object
 - In ImageViewer, iterating of the details in the `renderDetailsMethod()` is like the poorman's GraphQL, this is a great usecase for GraphQL
-- How to properly use types for Components when passing in props.
-- RxJS is also a good option for debounding input, but this hook variation also works well for a smaller project like this
-- Todo: look for API layer implementations in React and RxJS
-- Would be best pracitce to pull routes into an object, need to check if `react-router` supports guards like angular
+- Look for a good way for writing types for components that take in props
+- RxJS is also a good option for debounding input, but this hook variation in `debounce.ts` also works well for a smaller project like this
+- Todo: look for API layer implementations in React that uses RxJS
+- It would be best pracitce to pull routes into an object. Also, need to check if `react-router` supports guards like angular
 - Good practice is pulling out all the strings into a json file, need to check if there is a good i18n library for react
 - What would be a scalable way for importing SVGs?
 - In Redux, what is a good practice for preventing the kind of object nesting found in the `imagesReducer`? Think about the tradeoff between flattening objects vs. nesting.
-- Configure webpack for including css images (case: bootstrap)
+- Configure webpack for including css files (case: bootstrap)
 - Todo: Look into the persist library, and see how to properly cache bust
 - In the react router, look for the simplest way to remember the scroll position, as jumping between the search screen and the image viewer jumps the window to the top
 
