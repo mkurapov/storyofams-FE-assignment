@@ -4,7 +4,7 @@ https://storyofams-test.netlify.com/
 
 ### Considerations & Questions
 - When using Redux, where is best to put the FE business logic? Think about making a middle layer, or expanding the action method, or a thick reducer. The example: `fetchImages()` action contains most of the logic, but `TOGGLE_SAVED_IMAGE` case in the reducer contains the logic because it needs the state object
-- In ImageViewer, GraphQL would be a good use case for fetching the image details. Also, add a type to display the details: eg ImageDetails
+- In ImageViewer, iterating of the details in the `renderDetailsMethod()` is like the poorman's GraphQL, this is a great usecase for GraphQL
 - How to properly use types for Components when passing in props.
 - RxJS is also a good option for debounding input, but this hook variation also works well for a smaller project like this
 - Todo: look for API layer implementations in React and RxJS
